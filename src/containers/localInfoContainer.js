@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 
 import LocalInfo from '../components/LocalInfo';
 
-import 'whatwg-fetch';
+// import 'whatwg-fetch';
+
+import 'axios';
+import Axios from 'axios';
 
 class LocalInfoContainer extends Component {
 
@@ -14,17 +17,13 @@ class LocalInfoContainer extends Component {
     }
     
     componentDidMount(){
-        window.fetch('https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyBQmB4EGSCfePPlGmYGD-MUaLBsP49sP-Y&address=17660%2076th%20ct%20.%20Hialeah%20FL&electionId=6000')
+        Axios.get('https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyBQmB4EGSCfePPlGmYGD-MUaLBsP49sP-Y&address=17660%2076th%20ct%20.%20Hialeah%20FL&electionId=6000')
             .then((response) => {
-                console.log(response.body);
-            })
-            .then((theResponse) =>{
-                theResponse = theResponse.JSON();
-                console.log('~~~~~~~~~~~~~~~~~~~~~~',theResponse);
+                console.log(response.data);
                 this.setState({
-                    googleInfo: theResponse
+                    googleInfo: {response}
                 });
-                console.log(this.googleInfo);
+                console.log('~~~~~~~~~~~~~~~~~~~~~',this.googleInfo);
             })
             .catch(err => {
                 console.log(err);
