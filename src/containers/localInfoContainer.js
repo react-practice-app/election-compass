@@ -17,13 +17,14 @@ class LocalInfoContainer extends Component {
     }
     
     componentDidMount(){
-        Axios.get('https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyBQmB4EGSCfePPlGmYGD-MUaLBsP49sP-Y&address=17660%2076th%20ct%20.%20Hialeah%20FL&electionId=6000')
+        Axios.get('https://www.googleapis.com/civicinfo/v2/representatives?address=17660%2076th%20ct%20.%20Hialeah%20FL&key=AIzaSyBQmB4EGSCfePPlGmYGD-MUaLBsP49sP-Y')
             .then((response) => {
-                console.log(response.data);
+                // console.log(response);
+                // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
                 this.setState({
-                    googleInfo: response.data.election
+                    googleInfo: response.data
                 });
-                console.log('~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
+                // console.log('~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
             })
             .catch(err => {
                 console.log(err);
@@ -31,8 +32,26 @@ class LocalInfoContainer extends Component {
     }
 
     render() {
+        let cardsMapped = this.state.googleInfo.map((rep) => {
+            return (
+              <LocalInfo
+                // key={rep}
+                // office={this.state.googleInfo.offices.name}
+                name={this.state.googleInfo.officials.name}
+                // party={this.state.googleInfo.officials.party}
+                // image={this.state.googleInfo.officials.}
+              />
+            );
+          });
+          console.log('=================================================================',this.state.googleInfo);
         return (
-            <LocalInfo name={this.state.googleInfo.name} />
+            <div className="container">
+                <div className="row">
+                    <ul>
+                        {cardsMapped}
+                    </ul>
+                </div>
+            </div>
         );
     }   
 }
