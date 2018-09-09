@@ -65,24 +65,24 @@ class LocalInfoContainer extends Component {
       });
     } else {
       console.log(`CAN'T RUN MAPPINGINFO()`);
-      console.log("--------------this.state.officials: ", this.state.officials);
-      console.log("--------------this.state.officials: ", this.state.offices);
     }
   }
   render() {
     let cards = this.state.officialsWithTitles.map((official, i) => {
       return (
-        <LocalInfo key={i} office={official.title} official={official.name} />
+        <LocalInfo
+          key={i}
+          office={official.title}
+          official={official.name}
+          image={official.photoUrl}
+          party={official.party}
+          url={official.urls}
+        />
       );
     });
     return (
       <div className="container">
-        <div className="row">
-          <ul>
-            {/* <h1>PLACEHOLDER</h1> */}
-            {cards}
-          </ul>
-        </div>
+        <div className="row d-flex">{cards}</div>
       </div>
     );
   }
