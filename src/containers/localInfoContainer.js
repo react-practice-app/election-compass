@@ -21,9 +21,9 @@ class LocalInfoContainer extends Component {
             .then((response) => {
                 console.log(response.data);
                 this.setState({
-                    googleInfo: {response}
+                    googleInfo: response.data.election
                 });
-                console.log('~~~~~~~~~~~~~~~~~~~~~',this.googleInfo);
+                console.log('~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
             })
             .catch(err => {
                 console.log(err);
@@ -32,7 +32,7 @@ class LocalInfoContainer extends Component {
 
     render() {
         return (
-            <LocalInfo />
+            <LocalInfo name={this.state.googleInfo.name} />
         );
     }   
 }
