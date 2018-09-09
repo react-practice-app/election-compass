@@ -13,8 +13,7 @@ class LocalInfoContainer extends Component {
         super();
         this.state = {
             googleInfo: {},
-            officials: [],
-            offices: []
+            repInfo: []
         }
     }
     
@@ -25,10 +24,9 @@ class LocalInfoContainer extends Component {
                 // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
                 this.setState({
                     googleInfo: response.data,
-                    offices: response.data.offices,
-                    officials: response.data.officials
+                    repInfo: [response.data.officials, response.data.offices]
                 });
-                // console.log('~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
+                // console.log('~~~~~~~~~~~~~~~~~~~~~',this.state.repInfo);
             })
             .catch(err => {
                 console.log(err);
@@ -36,24 +34,24 @@ class LocalInfoContainer extends Component {
     }
 
     render() {
-        let cardsMapped = this.state.officials.map((rep,i) => {
-            return (
-              <LocalInfo
-                // key={rep}
-                // office={this.state.googleInfo.offices.name}
-                name={this.state.googleInfo.officials[i].name}
-                // party={this.state.googleInfo.officials.party}
-                // image={this.state.googleInfo.officials.}
-              />
-            );
-          });
-          console.log('=================================================================',this.state.offices);
-          console.log('=================================================================',this.state.officials);
+        // let cardsMapped = this.state.officials.map((rep,i) => {
+        //     return (
+        //       <LocalInfo
+        //         key={rep}
+        //         office={this.state.googleInfo.offices[i].name}
+        //         official={this.state.googleInfo.officials[i].name}
+        //         // party={this.state.googleInfo.officials.party}
+        //         // image={this.state.googleInfo.officials.}
+        //       />
+        //     );
+        // });
+          console.log('=================================================================',this.state.repInfo);
         return (
             <div className="container">
                 <div className="row">
                     <ul>
-                        {cardsMapped}
+                        <h1>PLACEHOLDER</h1>
+                        {/* {cardsMapped} */}
                     </ul>
                 </div>
             </div>
