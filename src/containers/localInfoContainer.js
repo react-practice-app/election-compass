@@ -12,7 +12,9 @@ class LocalInfoContainer extends Component {
     constructor(){
         super();
         this.state = {
-            googleInfo: {}
+            googleInfo: {},
+            officials: [],
+            offices: []
         }
     }
     
@@ -22,7 +24,9 @@ class LocalInfoContainer extends Component {
                 // console.log(response);
                 // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
                 this.setState({
-                    googleInfo: response.data
+                    googleInfo: response.data,
+                    offices: response.data.offices,
+                    officials: response.data.officials
                 });
                 // console.log('~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
             })
@@ -32,18 +36,19 @@ class LocalInfoContainer extends Component {
     }
 
     render() {
-        let cardsMapped = this.state.googleInfo.map((rep) => {
+        let cardsMapped = this.state.officials.map((rep,i) => {
             return (
               <LocalInfo
                 // key={rep}
                 // office={this.state.googleInfo.offices.name}
-                name={this.state.googleInfo.officials.name}
+                name={this.state.googleInfo.officials[i].name}
                 // party={this.state.googleInfo.officials.party}
                 // image={this.state.googleInfo.officials.}
               />
             );
           });
-          console.log('=================================================================',this.state.googleInfo);
+          console.log('=================================================================',this.state.offices);
+          console.log('=================================================================',this.state.officials);
         return (
             <div className="container">
                 <div className="row">
