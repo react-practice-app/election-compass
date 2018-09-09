@@ -13,7 +13,9 @@ class LocalInfoContainer extends Component {
         super();
         this.state = {
             googleInfo: {},
-            repInfo: []
+            officials: [],
+            offices: [],
+            props: []
         }
     }
     
@@ -23,40 +25,55 @@ class LocalInfoContainer extends Component {
                 // console.log(response);
                 // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
                 this.setState({
-                    googleInfo: response.data,
-                    repInfo: [response.data.officials, response.data.offices]
+                    googleInfo:     response.data,
+                    officials:      response.data.officials,
+                    offices:        response.data.offices
                 });
+                // this.mappingInfo();
                 // console.log('~~~~~~~~~~~~~~~~~~~~~',this.state.repInfo);
+                this.mappingInfo();
             })
             .catch(err => {
                 console.log(err);
             })
     }
-
+    mappingInfo() {
+        if (this.state.officials.length && this.state.offices.length) {
+            let propsCopy = [];
+            for(let i = 0; i < this.state.officials.length; i++){
+                if(this.state.officials[i] && this.state.offices[i]){
+                    propsCopy[i] = this.state.officials[i];
+                    propsCopy[i].title = this.state.offices[i].name;
+                } else {
+                    // console.log('NO MATCH FOR OFFICE',this.state.offices[i],this.state.officials[i]);
+                    continue;
+                }
+            }
+            this.setState({
+                props: propsCopy
+            });
+                return (<LocalInfo office={this.state.offices.name} official={this.state.officials.name} />);
+        } else {
+            console.log(`CAN'T RUN MAPPINGINFO()`);
+            console.log('--------------this.state.officials: ',this.state.officials);
+            console.log('--------------this.state.officials: ',this.state.offices);
+        }
+    }
     render() {
-        // let cardsMapped = this.state.officials.map((rep,i) => {
-        //     return (
-        //       <LocalInfo
-        //         key={rep}
-        //         office={this.state.googleInfo.offices[i].name}
-        //         official={this.state.googleInfo.officials[i].name}
-        //         // party={this.state.googleInfo.officials.party}
-        //         // image={this.state.googleInfo.officials.}
-        //       />
-        //     );
-        // });
-          console.log('=================================================================',this.state.repInfo);
+        console.log(this.state.googleInfo);
         return (
             <div className="container">
                 <div className="row">
                     <ul>
                         <h1>PLACEHOLDER</h1>
-                        {/* {cardsMapped} */}
+                        {/* {this.state.cardsMapped} */}
                     </ul>
                 </div>
             </div>
         );
     }   
+
+
 }
 
 export default LocalInfoContainer;
