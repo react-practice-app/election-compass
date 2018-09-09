@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class LocalInfo extends Component {
     render() {
-        console.log('**********',this.props.name);
+        // console.log('**********',this.props.officials);
+        // console.log('**********',this.props.offices);
         return (
         <div className="card" style={{ width: 18 + 'rem' }}>
             <div className="card-body">
