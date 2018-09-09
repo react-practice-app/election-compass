@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
-const LocalInfo = props =>
-    <h1>{props.election}</h1>
-
+class LocalInfo extends Component {
+    state = {}
+    render() { 
+        return ( <h1>
+            {this.props.name}
+        </h1> );
+    }
+}
+ 
 export default LocalInfo;
