@@ -82,7 +82,7 @@ class LocalInfoContainer extends Component {
     });
     return (
       <div className="container">
-        <div className="row d-flex">{cards}</div>
+        <div className="row d-flex mt-5">{cards}</div>
       </div>
     );
   }
