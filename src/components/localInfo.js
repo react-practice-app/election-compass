@@ -49,7 +49,7 @@ class LocalInfo extends Component {
               className="btn btn-primary"
               style={{ marginBottom: 0 + "px" }}
             >
-              More Info
+              Official Website
             </a>
           </div>
         </div>
