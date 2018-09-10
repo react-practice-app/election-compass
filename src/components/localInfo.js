@@ -7,6 +7,8 @@ class LocalInfo extends Component {
       badge += "badge-danger";
     } else if (this.props.party === "Democratic") {
       badge += "badge-primary";
+    } else {
+      badge += "badge-warning";
     }
     return badge;
   }
