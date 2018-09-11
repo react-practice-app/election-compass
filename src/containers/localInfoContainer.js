@@ -19,7 +19,7 @@ class LocalInfoContainer extends Component {
     };
   }
 
-  componentDidMount() {
+  fetchGoogleInfo() {
     Axios.get(
       "https://www.googleapis.com/civicinfo/v2/representatives?address=17660%2076th%20ct%20.%20Hialeah%20FL&key=AIzaSyBQmB4EGSCfePPlGmYGD-MUaLBsP49sP-Y"
     )
@@ -38,6 +38,10 @@ class LocalInfoContainer extends Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  componentDidMount() {
+    this.fetchGoogleInfo();
   }
   mappingInfo() {
     if (
