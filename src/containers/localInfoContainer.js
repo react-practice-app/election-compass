@@ -14,9 +14,13 @@ class LocalInfoContainer extends Component {
       googleInfo: {},
       officials: [],
       offices: [],
-      props: [],
-      officialsWithTitles: []
+      props: []
+      //       officialsWithTitles: []
     };
+  }
+  componentDidMount() {
+    this.fetchGoogleInfo();
+    //     this.mappingInfo();
   }
 
   fetchGoogleInfo() {
@@ -40,39 +44,30 @@ class LocalInfoContainer extends Component {
       });
   }
 
-  componentDidMount() {
-    this.fetchGoogleInfo();
-  }
   mappingInfo() {
-    if (
-      this.state.officials.length &&
-      this.state.offices.length &&
-      this.state.officialsWithTitles.length != this.state.officials.length
-    ) {
-      let officialsWithTitlesCopy = [];
-      for (let i = 0; i < this.state.officials.length; i++) {
-        officialsWithTitlesCopy[i] = this.state.officials[i];
-        for (let n = 0; n < this.state.offices.length; n++) {
-          for (
-            let j = 0;
-            j < this.state.offices[n].officialIndices.length;
-            j++
-          ) {
-            if (this.state.offices[n].officialIndices[j] === i) {
-              officialsWithTitlesCopy[i].title = this.state.offices[n].name;
-            }
-          }
+    if (this.state.officials.length && this.state.offices.length) {
+      let officialsCopy = this.state.officials;
+      let titles = {};
+      for (let i = 0; i < this.state.offices.length; i++) {
+        for (let j = 0; j < this.state.offices[i].officialIndices.length; j++) {
+          titles[this.state.offices[i].officialIndices[j]] = this.state.offices[
+            i
+          ].name;
         }
       }
+      for (let i = 0; i < this.state.officials.length; i++) {
+        officialsCopy[i].title = titles[i];
+      }
       this.setState({
-        officialsWithTitles: officialsWithTitlesCopy
+        officials: officialsCopy
       });
     } else {
       console.log(`CAN'T RUN MAPPINGINFO()`);
+      console.log(this.state.officials.length, this.state.offices.length);
     }
   }
   render() {
-    let cards = this.state.officialsWithTitles.map((official, i) => {
+    let cards = this.state.officials.map((official, i) => {
       return (
         <LocalInfo
           key={i}
