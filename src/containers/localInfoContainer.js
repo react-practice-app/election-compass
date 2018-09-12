@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 import LocalInfo from "../components/LocalInfo";
 
-// import 'whatwg-fetch';
-
 import "axios";
 import Axios from "axios";
+
+import "dotenv";
+const googleKey = process.env.REACT_APP_GOOGLE;
 
 class LocalInfoContainer extends Component {
   constructor() {
@@ -15,7 +16,6 @@ class LocalInfoContainer extends Component {
       officials: [],
       offices: [],
       props: []
-      //       officialsWithTitles: []
     };
   }
   componentDidMount() {
@@ -25,25 +25,20 @@ class LocalInfoContainer extends Component {
 
   fetchGoogleInfo() {
     Axios.get(
-      "https://www.googleapis.com/civicinfo/v2/representatives?address=17660%2076th%20ct%20.%20Hialeah%20FL&key=AIzaSyBQmB4EGSCfePPlGmYGD-MUaLBsP49sP-Y"
+      `https://www.googleapis.com/civicinfo/v2/representatives?address=17660%2076th%20ct%20.%20Hialeah%20FL&key=${googleKey}`
     )
       .then(response => {
-        // console.log(response);
-        // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',this.state.googleInfo.name);
         this.setState({
           googleInfo: response.data,
           officials: response.data.officials,
           offices: response.data.offices
         });
-        // this.mappingInfo();
-        // console.log('~~~~~~~~~~~~~~~~~~~~~',this.state.repInfo);
         this.mappingInfo();
       })
       .catch(err => {
         console.log(err);
       });
   }
-
   mappingInfo() {
     if (this.state.officials.length && this.state.offices.length) {
       let officialsCopy = this.state.officials;
