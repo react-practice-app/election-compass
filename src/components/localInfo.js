@@ -13,11 +13,10 @@ class LocalInfo extends Component {
     return badge;
   }
   render() {
-    // console.log('**********',this.props.officials);
-    // console.log('**********',this.props.offices);
+    console.log("**********", this.props);
     return (
       <div className="col-lg-3 col-md-4 col-sm-12">
-        <div className="card mb-5" style={{ minHeight: 650 + "px" }}>
+        <div className="card m-2" style={{ minHeight: 650 + "px" }}>
           <div className="card-header text-center">
             <h4 className="card-title font-weight-bold">
               {this.props.official}
