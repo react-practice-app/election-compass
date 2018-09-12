@@ -17,7 +17,7 @@ class LocalInfo extends Component {
     // console.log('**********',this.props.offices);
     return (
       <div className="col-lg-3 col-md-4 col-sm-12">
-        <div className="card mb-5" style={{ height: 75 + "vh" }}>
+        <div className="card mb-5" style={{ minHeight: 650 + "px" }}>
           <div className="card-header text-center">
             <h4 className="card-title font-weight-bold">
               {this.props.official}
